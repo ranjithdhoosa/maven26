@@ -3,7 +3,7 @@ pipeline
     agent any
     stages
     {
-        stage('CDownload')
+        stage('CDownload_loans')
         {
             steps
             {
@@ -21,7 +21,7 @@ pipeline
                 }    
             }
         }
-        stage('CBuild')
+        stage('CBuild_loans')
         {
             steps
             {
@@ -40,7 +40,7 @@ pipeline
                 
             }
         }
-        stage('CDeploy')
+        stage('CDeploy_loans')
         {
             steps
             {
@@ -58,21 +58,6 @@ pipeline
                 }    
             }
         }
-        stage('CTest')
-        {
-            steps
-            {
-                git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
-                sh 'java -jar /home/ubuntu/.jenkins/workspace/declarativepipeline2/testing.jar'
-            }
-        }
-        stage('CDelivery')
-        {
-            steps
-            {
-                deploy adapters: [tomcat9(credentialsId: 'f23b04ed-4dab-43ad-88ac-fece31432fee', path: '', url: 'http://172.31.81.23:8080')], contextPath: 'prodaap', war: '**/*.war'
-            }
-        }
-        
+                
     }
 }
